@@ -1,5 +1,5 @@
-#ifndef JOUEUR_H
-#define JOUEUR_H
+#ifndef SABOT_H
+#define SABOT_H
 
 #include <iostream>
 #include <fstream>
@@ -9,6 +9,8 @@
 #include <vector>
 #include <string>
 #include <sstream>
+
+#include "joueur.h"
 
 using namespace std;
 
