@@ -1,5 +1,5 @@
-#include "rand.h"
 
+#include "rand.h"
 
 bool rand1::pioche_rand1()
 {

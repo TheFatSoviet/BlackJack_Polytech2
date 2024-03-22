@@ -7,6 +7,7 @@ public:
     int Nombre_Joueurs = 0;
 
     jeu(char nb_joueur_char, int nb_joueur);
+    void BoucleDeJeu(std::vector<Joueur>& joueurs);
   //  void Afficher_Cartes_Joueur(const Joueur& joueur, size_t numeroDuJoueur);
 };
 
