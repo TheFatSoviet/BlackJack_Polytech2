@@ -22,7 +22,6 @@ public:
 
     //joueur();
     void setTypeJoueur(int i);
-    void calcul_score();
     void Afficher_Cartes_Joueur(const joueur& joueur, size_t numeroDuJoueur);
     void Afficher_donner_joueur();
     string set_nom(vector<joueur>& joueurs,int i);

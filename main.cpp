@@ -136,7 +136,7 @@ int main()
 
  for (size_t i = 0; i < joueurs.size(); ++i)
  {
-     joueurs[i].calcul_score();
+     joueurs[i].score_in_game = blackjack.Calcule_Score(joueurs[i].cartes);
      cout << "Le joueurs " << i << "a un score de : " << joueurs[i].score_in_game << endl;
  }
 
