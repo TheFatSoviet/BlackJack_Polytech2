@@ -17,7 +17,6 @@ public:
     //jeu(char nb_joueur_char, int nb_joueur);
     int def_nb_joueur();
 
-
 };
 
 

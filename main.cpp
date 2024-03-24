@@ -42,7 +42,6 @@ int main()
 
   // Boucle pour obtenir et définir les noms des joueurs.
   for (int i = 1; i <= blackjack.Nombre_Joueurs; ++i) {
-
     // Une fois un nom unique obtenu, l'assigner au joueur
     strcpy(joueurs[i].nom, joueurs[i].set_nom(joueurs,i).c_str());
   }
@@ -60,7 +59,7 @@ int main()
       typeValide = typeTemp == "humain" || typeTemp == "ret3" || typeTemp == "rand1" || typeTemp == "tir16" || typeTemp == "magic";
 
       if (!typeValide) {
-        std::cout << "Type invalide. Veuillez réessayer." << std::endl;
+        cout << "Type invalide. Veuillez réessayer." << endl;
       } else {
         // Copier le type valide dans l'attribut type_joueur du joueur
         strncpy(joueurs[i].type_joueur, typeTemp.c_str(), sizeof(joueurs[i].type_joueur) - 1);
@@ -112,37 +111,24 @@ int main()
       srand(static_cast < unsigned int > (time(nullptr)));
 
       for (size_t i = 1; i < joueurs.size(); ++i) { // Commence à 1 pour exclure le croupier
-        if (strcmp(joueurs[i].type_joueur, "humain") != 0) { // Si le joueur n'est pas humain
-          // Assigner une mise aléatoire entre 10 et 100
-          joueurs[i].jeton_mise = rand() % 91 + 10; // % 91 assure une plage de 0-90, + 10 décale à 10-100
-        } else {
-          // Demander la mise pour les joueurs humains
-          do {
-            std::cout << "Joueur " << joueurs[i].nom << ", entrez votre mise (entre 10 et 100 jetons) : ";
-            std::cin >> joueurs[i].jeton_mise;
-            if (joueurs[i].jeton_mise < 10 || joueurs[i].jeton_mise > 100) {
-              cout << "Mise non valide. Veuillez miser entre 10 et 100 jetons." << endl;
-            }
-          } while (joueurs[i].jeton_mise < 10 || joueurs[i].jeton_mise > 100);
-        }
+        joueurs[i].jeton_mise=joueurs[i].set_mise(joueurs,i);
       }
 
       // Afficher la mise de tous les joueurs (sauf le croupier)
       for (size_t i = 1; i < joueurs.size(); ++i) {
-        std::cout << "Joueur " << joueurs[i].nom << " a mise " << joueurs[i].jeton_mise << " jetons." << std::endl;
+        cout << "Joueur " << joueurs[i].nom << " a mise " << joueurs[i].jeton_mise << " jetons." << endl;
       }
+     // Distribution des cartes
+     deck.Distribuer_Cartes(joueurs);
 
- // Distribution des cartes
- deck.Distribuer_Cartes(joueurs);
+     // Affichage des cartes du dealer
+     //joueurs[0].Afficher_Cartes_Joueur(joueurs[0], 0);
 
- // Affichage des cartes du dealer
- //joueurs[0].Afficher_Cartes_Joueur(joueurs[0], 0);
-
- //Affichage des cartes de tous les joueurs, y compris le dealer
- for (size_t i = 0; i < joueurs.size(); ++i)
- {
-     joueurs[i].Afficher_Cartes_Joueur(joueurs[i], i);
- }
+     //Affichage des cartes de tous les joueurs, y compris le dealer
+     for (size_t i = 0; i < joueurs.size(); ++i)
+     {
+         joueurs[i].Afficher_Cartes_Joueur(joueurs[i], i);
+     }
 
 
 

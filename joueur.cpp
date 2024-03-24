@@ -100,6 +100,27 @@ void joueur::Afficher_Cartes_Joueur(const joueur& joueur, size_t numeroDuJoueur)
     cout <<endl;
 }
 
+
+int joueur::set_mise(vector<joueur>& joueurs,int i)
+{
+  int tampon;
+
+  if (strcmp(joueurs[i].type_joueur, "humain") != 0) { // Si le joueur n'est pas humain
+    // Assigner une mise aléatoire entre 10 et 100
+    tampon = rand() % 91 + 10; // % 91 assure une plage de 0-90, + 10 décale à 10-100
+  } else {
+    // Demander la mise pour les joueurs humains
+    do {
+      cout << "Joueur " << joueurs[i].nom << ", entrez votre mise (entre 10 et 100 jetons) : ";
+      cin >> tampon;
+      if (tampon < 10 || tampon > 100) {
+        cout << "Mise non valide. Veuillez miser entre 10 et 100 jetons." << endl;
+      }
+    } while (tampon < 10 || tampon > 100);
+  }
+  return tampon;
+}
+
 void joueur::Afficher_donner_joueur(){
       cout << "," << nom << "," << nb_partie_joue << ',' << jeton_disponible << std::endl;
 }

@@ -11,7 +11,7 @@
 #include <sstream>
 #include <map>
 
-//#include "jeu.h"
+#include "jeu.h"
 #include "joueur.h"
 
 using namespace std;

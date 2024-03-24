@@ -6,7 +6,8 @@
 #include <string>
 #include <vector>
 #include <cstddef>  // Pour size_t
-
+#include <cstring> // Pour les fonctions de manipulation de chaînes de caractères comme strcpy et strncpy.
+#include <ctime>
 
 class joueur : public jeu
 {
@@ -24,6 +25,7 @@ public:
     void Afficher_Cartes_Joueur(const joueur& joueur, size_t numeroDuJoueur);
     void Afficher_donner_joueur();
     string set_nom(vector<joueur>& joueurs,int i);
+    int set_mise(vector<joueur>& joueurs,int i);
 };
 
 
