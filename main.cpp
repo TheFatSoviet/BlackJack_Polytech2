@@ -134,6 +134,11 @@ int main()
      joueurs[i].Afficher_Cartes_Joueur(joueurs[i], i);
  }
 
+ for (size_t i = 0; i < joueurs.size(); ++i)
+ {
+     joueurs[i].calcul_score();
+     cout << "Le joueurs " << i << "a un score de : " << joueurs[i].score_in_game << endl;
+ }
 
 
 
