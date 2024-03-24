@@ -2,7 +2,7 @@
 #define JEU_H
 
 #include <iostream>
-
+#include <vector>
 
 using namespace std;
 
@@ -16,7 +16,7 @@ public:
 
     //jeu(char nb_joueur_char, int nb_joueur);
     int def_nb_joueur();
-
+    int Calcule_Score(const vector<string>& cartes);
 };
 
 
