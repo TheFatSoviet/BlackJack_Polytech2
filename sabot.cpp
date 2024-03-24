@@ -249,7 +249,7 @@ using namespace std;
     {
         ifstream fileIn("Sabot.txt");
         string contenu, carte;
-        vector<std::string> cartes;
+
 
         if (fileIn.is_open()) {
             getline(fileIn, contenu); // Lit toute la ligne du fichier Sabot.txt.

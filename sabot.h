@@ -29,6 +29,8 @@ public:
   void Retire_Cartes(joueur& joueur);
 
   void verifierSabot(int nombreDeJoueurs);
+
+  bool pioche(vector<joueur>& joueur);
 };
 
 #endif

@@ -148,149 +148,69 @@ int main()
 
 
 
+        cout << endl;
+        cout << "//////////////////////////////////////////////////" << endl;
+        cout << "/////////////////    SCORE FINALE     ////////////" << endl;
+        cout << "//////////////////////////////////////////////////" << endl;
+        cout << endl;
+
+        //score
+        for (size_t i = 0; i < joueurs.size(); ++i) {
+          std::cout << "Le joueur " << joueurs[i].nom << " a :" << joueurs[i].score_in_game << std::endl;
+        }
+
+        cout << std::endl;
+        cout << "//////////////////////////////////////////////////" << endl;
+        cout << "/////////////////    PHASE DE GAIN    ////////////" << endl;
+        cout << "//////////////////////////////////////////////////" << endl;
+        cout << endl;
 
 
 
-/*
-std::cout << std::endl;
-    std::cout << "//////////////////////////////////////////////////" << std::endl;
-    std::cout << "/////////////////    SCORE FINALE     ////////////" << std::endl;
-    std::cout << "//////////////////////////////////////////////////" << std::endl;
-    std::cout << std::endl;
+        for (size_t i = 1; i < joueurs.size(); ++i) {
+          int nouveauTotalJetons =joueurs[i].calcul_gain(joueurs[i].score_in_game, joueurs[0].score_in_game, joueurs[i].jeton_disponible, joueurs[i].jeton_mise);
 
-    //score
-    for (size_t i = 0; i < joueurs.size(); ++i) {
-      std::cout << "Le joueur " << joueurs[i].nom << " a :" << joueurs[i].score_in_game << std::endl;
-    }
+          // Imprimez le résultat et mettez à jour les jetons du joueur
+          if (nouveauTotalJetons > joueurs[i].jeton_disponible) {
+            cout << "Joueur " << joueurs[i].nom << " gagne " << (nouveauTotalJetons - joueurs[i].jeton_disponible) << " jetons." << endl;
+          } else if (nouveauTotalJetons < joueurs[i].jeton_disponible) {
+            cout << "Joueur " << joueurs[i].nom << " perd " << (joueurs[i].jeton_disponible - nouveauTotalJetons) << " jetons." << endl;
+          } else {
+            cout << "Joueur " << joueurs[i].nom << " ne gagne ni ne perd des jetons." << endl;
+          }
 
-    std::cout << std::endl;
-    std::cout << "//////////////////////////////////////////////////" << std::endl;
-    std::cout << "/////////////////    PHASE DE GAIN    ////////////" << std::endl;
-    std::cout << "//////////////////////////////////////////////////" << std::endl;
-    std::cout << std::endl;
+          joueurs[i].jeton_disponible = nouveauTotalJetons; // Mettre à jour les jetons du joueur
+        }
 
-    gain calculateurDeGain; // Créez une instance de votre classe gain
+        cout << endl;
+        cout << "//////////////////////////////////////////////////" << endl;
+        cout << "/////////////////    INFO JETONS      ////////////" << endl;
+        cout << "//////////////////////////////////////////////////" << endl;
+        cout << endl;
 
-    for (size_t i = 1; i < joueurs.size(); ++i) {
-      int nouveauTotalJetons = calculateurDeGain.calcul_gain(joueurs[i].score_in_game, joueurs[0].score_in_game, joueurs[i].jeton_possede, joueurs[i].jeton_mise);
+        for (size_t i = 1; i < joueurs.size(); ++i) {
+          const auto & joueur = joueurs[i];
+          cout << "Joueur " << joueur.nom << " possède " << joueur.jeton_disponible << " jetons." << endl;
+        }
 
-      // Imprimez le résultat et mettez à jour les jetons du joueur
-      if (nouveauTotalJetons > joueurs[i].jeton_possede) {
-        std::cout << "Joueur " << joueurs[i].nom << " gagne " << (nouveauTotalJetons - joueurs[i].jeton_possede) << " jetons." << std::endl;
-      } else if (nouveauTotalJetons < joueurs[i].jeton_possede) {
-        std::cout << "Joueur " << joueurs[i].nom << " perd " << (joueurs[i].jeton_possede - nouveauTotalJetons) << " jetons." << std::endl;
-      } else {
-        std::cout << "Joueur " << joueurs[i].nom << " ne gagne ni ne perd des jetons." << std::endl;
+        // Après toutes les manipulations des cartes
+
+        cout << endl;
+        cout << "//////////////////////////////////////////////////" << endl;
+        cout << "/////////////////    FIN DE ROUND " << blackjack.N_Manche_Actuelle << "    ////////////" << endl;
+        cout << "//////////////////////////////////////////////////" << endl;
+        cout << endl;
+
+        // // Reset le choix de l'humain de ne plus piocher de carte
+        // for (auto & joueur: joueurs) {
+        //   if (auto h = dynamic_cast < humain * > ( & joueur)) {
+        //     h -> flag_repondu_non = 0; // Réinitialiser le flag pour le joueur humain
+        //   }
+        // }
+
+        deck.Ranger_Cartes(joueurs);
+
       }
-
-      joueurs[i].jeton_possede = nouveauTotalJetons; // Mettre à jour les jetons du joueur
-    }
-
-    std::cout << std::endl;
-    std::cout << "//////////////////////////////////////////////////" << std::endl;
-    std::cout << "/////////////////    INFO JETONS      ////////////" << std::endl;
-    std::cout << "//////////////////////////////////////////////////" << std::endl;
-    std::cout << std::endl;
-
-    for (size_t i = 1; i < joueurs.size(); ++i) {
-      const auto & joueur = joueurs[i];
-      std::cout << "Joueur " << joueur.nom << " possède " << joueur.jeton_possede << " jetons." << std::endl;
-    }
-
-    // Après toutes les manipulations des cartes
-
-    std::cout << std::endl;
-    std::cout << "//////////////////////////////////////////////////" << std::endl;
-    std::cout << "/////////////////    FIN DE ROUND " << N_Manche_Actuelle << "    ////////////" << std::endl;
-    std::cout << "//////////////////////////////////////////////////" << std::endl;
-    std::cout << std::endl;
-
-    // Reset le choix de l'humain de ne plus piocher de carte
-    for (auto & joueur: joueurs) {
-      if (auto h = dynamic_cast < humain * > ( & joueur)) {
-        h -> flag_repondu_non = 0; // Réinitialiser le flag pour le joueur humain
-      }
-    }
-
-    Ranger_Cartes(joueurs);
-
-  }*/
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-//
-// //score
-//   for (size_t i = 0; i < joueurs.size(); ++i)
-//   {
-//         std::cout << "Le joueur " << joueurs[i].nom << " a :" << joueurs[i].score_in_game << std::endl;
-//   }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-  // Après toutes les manipulations des cartes
-    //  Ranger_Cartes(joueurs);
-
-
-
-//  int NB_Cartes_a_retirer;
-//    std::cout << "Entrez le nombre de cartes a retirer : ";
-//    std::cin >> NB_Cartes_a_retirer;
-
-    // Exemple d'utilisation de la fonction RetireCartes
-//    Retire_Cartes(NB_Cartes_a_retirer);
-
-
-//    std::vector<std::string> cartes_a_ajouter = {"1", "2", "3"};
-//    Rajout_Cartes(cartes_a_ajouter);
-
-////////////////////////////////////////////////////////////
-
-  //  std::vector<std::string> cartes = {"1", "5","8"};
-
-    // Calcul du score pour cet ensemble de cartes
-//    int score = Calcule_Score(cartes);
-
-    // Affichage du score
-  //  std::cout << "Le score est: " << score << std::endl;
-
-}
 
     return 0;
 }
