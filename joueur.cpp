@@ -144,7 +144,7 @@ void joueur::Afficher_Cartes_Joueur(const joueur& joueur, size_t numeroDuJoueur)
 int joueur::set_mise(vector<joueur>& joueurs,int i)
 {
   int tampon;
-
+  
   if (strcmp(joueurs[i].type_joueur, "humain") != 0) { // Si le joueur n'est pas humain
     // Assigner une mise aléatoire entre 10 et 100
     tampon = rand() % 91 + 10; // % 91 assure une plage de 0-90, + 10 décale à 10-100

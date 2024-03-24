@@ -5,7 +5,7 @@
 #include <iostream>
 #include <stdlib.h>
 
-#include "Joueur.h"
+#include "joueur.h"
 
 using namespace std;
 
