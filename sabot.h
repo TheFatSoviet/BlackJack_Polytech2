@@ -22,15 +22,10 @@ public:
 
   int Melange_Cartes(int value);
 
-  void Ranger_Cartes(vector<joueur>& joueurs);
-
   void Distribuer_Cartes(vector<joueur>& joueurs);
-
-  void Retire_Cartes(joueur& joueur);
 
   void verifierSabot(int nombreDeJoueurs);
 
-  bool pioche(vector<joueur>& joueur);
 };
 
 #endif

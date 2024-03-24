@@ -8,6 +8,7 @@
 #include <cstddef>  // Pour size_t
 #include <cstring> // Pour les fonctions de manipulation de chaînes de caractères comme strcpy et strncpy.
 #include <ctime>
+#include <sstream>
 
 class joueur : public jeu
 {
@@ -27,6 +28,7 @@ public:
     string set_nom(vector<joueur>& joueurs,int i);
     int set_mise(vector<joueur>& joueurs,int i);
     int calcul_gain(int score_j,int score_c,int jeton, int mise);
+    
 };
 
 

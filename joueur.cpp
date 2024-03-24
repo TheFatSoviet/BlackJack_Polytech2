@@ -18,6 +18,7 @@ using namespace std;
 //     // std::vector<std::string> cartes; // Crée un vecteur pour stocker les cartes, mais cette ligne ne fait rien et devrait être retirée ou modifiée.
 // }:
 
+
 // Méthode pour définir le type de joueur.
 void joueur::setTypeJoueur(int i)
 {
@@ -137,6 +138,7 @@ void joueur::Afficher_Cartes_Joueur(const joueur& joueur, size_t numeroDuJoueur)
 
     cout <<endl;
 }
+
 
 
 int joueur::set_mise(vector<joueur>& joueurs,int i)
