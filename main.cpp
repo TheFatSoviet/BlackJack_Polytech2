@@ -209,14 +209,14 @@ int main()
   strcpy(joueurs[0].nom, "Croupier");
   strcpy(joueurs[0].type_joueur, "croupier");
 
-  // Boucle pour obtenir et définir les noms des joueurs.
+
+  //Boucle pour obtenir et définir les noms des joueurs.
   for (int i = 1; i <= blackjack.Nombre_Joueurs; ++i) {
     std::string nomTemp;
     bool nomUnique;
 
     do {
       nomUnique = true; // On suppose initialement que le nom est unique
-
       cout << "Entrez le nom pour le joueur " << i << ": ";
       getline(std::cin, nomTemp);
 
@@ -237,30 +237,20 @@ int main()
     } while (!nomUnique); // Répéter tant que le nom n'est pas unique
 
     // Une fois un nom unique obtenu, l'assigner au joueur
-    strcpy(joueurs[i].nom, nomTemp.c_str());
+    joueurs[i].def_nom_joueur(nomTemp);
   }
+
 
   // Après avoir défini les types des joueurs
   for (int i = 1; i <= blackjack.Nombre_Joueurs; ++i) { // Exclure le croupier de la saisie
     string typeTemp;
-    bool typeValide;
+    bool Valide;
 
     do {
       cout << "Entrez le type pour le joueur " << i << " (humain, ret3, rand1, tir16, magic): ";
       getline(std::cin, typeTemp);
-
-      // Vérifier si le type saisi est valide
-      typeValide = typeTemp == "humain" || typeTemp == "ret3" || typeTemp == "rand1" || typeTemp == "tir16" || typeTemp == "magic";
-
-      if (!typeValide) {
-        std::cout << "Type invalide. Veuillez réessayer." << std::endl;
-      } else {
-        // Copier le type valide dans l'attribut type_joueur du joueur
-        strncpy(joueurs[i].type_joueur, typeTemp.c_str(), sizeof(joueurs[i].type_joueur) - 1);
-        joueurs[i].type_joueur[sizeof(joueurs[i].type_joueur) - 1] = '\0'; // Assure que la chaîne est terminée par un '\0'
-      }
-
-    } while (!typeValide); // Répéter jusqu'à obtenir un type valide
+      Valide = joueurs[i].setTypeJoueur(typeTemp);
+    } while (!Valide); // Répéter jusqu'à obtenir un type valide
   }
 
 

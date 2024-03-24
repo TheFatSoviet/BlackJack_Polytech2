@@ -1,6 +1,10 @@
 #include <cstring> // Pour les fonctions de manipulation de chaînes de caractères comme strcpy et strncpy.
 #include <iostream> // Pour l'entrée/sortie, notamment std::cerr.
 #include "joueur.h"
+#include <fstream>
+#include <vector>
+#include <algorithm>
+#include <ctime>
 
 using namespace std;
 // Définition du constructeur de la classe Joueur.
@@ -15,25 +19,26 @@ using namespace std;
 // }:
 
 // Méthode pour définir le type de joueur.
-void joueur::setTypeJoueur(const char* type)
+bool joueur::setTypeJoueur(const string type)
 {
-    strncpy(type_joueur, type, sizeof(type_joueur) - 1); // Copie le type en s'assurant de ne pas dépasser la taille du tableau.
-    type_joueur[sizeof(type_joueur) - 1] = '\0'; // Assure que la chaîne est bien terminée par un caractère nul.
+  bool typeValide;
+  typeValide = type == "humain" || type == "ret3" || type == "rand1" || type == "tir16" || type == "magic";
+  if (!typeValide) {
+    std::cout << "Type invalide. Veuillez réessayer." << std::endl;
+    return false;
+  }
+  else{
+    strncpy(type_joueur, type.c_str(), sizeof(type_joueur) - 1);
+    type_joueur[sizeof(type_joueur) - 1] = '\0'; // Assure que la chaîne est terminée par un '\0'
+    return true;
+  }
 }
 
 
 // Méthode pour définir ou changer le nom du joueur.
-void joueur::creation_joueur(const char* nouveau_nom)
+void joueur::def_nom_joueur(const string nouveau_nom)
 {
-
-
-    size_t longueur_nom = strlen(nouveau_nom); // Calcule la longueur du nouveau nom.
-    if (longueur_nom >= sizeof(nom)) // Vérifie si le nouveau nom est trop long pour le tableau 'nom'.
-    {
-        std::cerr << "Erreur : le nom est trop long." << std::endl; // Affiche une erreur si c'est le cas.
-        return; // Quitte la méthode sans changer le nom.
-    }
-    strcpy(nom, nouveau_nom); // Copie le nouveau nom dans le tableau 'nom' si tout est en ordre.
+  strcpy(nom, nouveau_nom.c_str());
 }
 
 void joueur::Afficher_Cartes_Joueur(const joueur& joueur, size_t numeroDuJoueur)
