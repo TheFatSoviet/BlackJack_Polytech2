@@ -19,7 +19,7 @@ class sabot : public joueur
 {
 public:
 
-  int Melange_Cartes(char value);
+  int Melange_Cartes(int value);
 
   void Ranger_Cartes(vector<joueur>& joueurs);
 

@@ -188,6 +188,7 @@
 int main()
 {
 
+int test;
    // Vecteur pour conserver les joueurs, y compris le dealer.
    vector<joueur> joueurs;
 
@@ -197,11 +198,11 @@ int main()
 
    blackjack.Nombre_Joueurs=blackjack.def_nb_joueur();
 
-cout<<blackjack.Nombre_Joueurs;
+   cout<<blackjack.Nombre_Joueurs;
 
    // Appel de la fonction de mélange des cartes.
-   //deck.Melange_Cartes(blackjack.Nombre_Joueurs);
-
+   test=deck.Melange_Cartes(blackjack.Nombre_Joueurs);
+cout<<test;
    // Initialisation des joueurs, y compris le dealer.
    //joueurs.resize(Nombre_Joueurs + 1);
 

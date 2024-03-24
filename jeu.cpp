@@ -1,11 +1,11 @@
-
 #include "jeu.h"
+
 
 //jeu::jeu(char nb_joueur_char, int nb_joueur) : Nombre_Joueurs_char(nb_joueur_char), Nombre_Joueurs(nb_joueur){}
 
 int jeu::def_nb_joueur()
 {
-  Nombre_Joueurs=0;
+  int Nombre_Joueurs=0;
   // Boucle pour s'assurer que le nombre de joueurs est dans la plage valide.
   while (Nombre_Joueurs < 1 || Nombre_Joueurs > 7) {
     cout << "Entrez le nombre de joueurs (entre 1 et 7) : ";

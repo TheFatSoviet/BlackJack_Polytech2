@@ -3,10 +3,10 @@
 using namespace std;
 
 
-  int sabot::Melange_Cartes(char value)
+  int sabot::Melange_Cartes(int value)
   {
       value++;
-      if (value < '1' || value > '8')
+      if (value < 1 || value > 8)
           return 0; // Si la valeur n'est pas entre 1 et 8, renvoyer 0
 
       // Création d'un jeu de cartes
