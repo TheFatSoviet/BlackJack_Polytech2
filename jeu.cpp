@@ -1,9 +1,28 @@
+
 #include "jeu.h"
 
-jeu::jeu(char nb_joueur_char, int nb_joueur) : Nombre_Joueurs_char(nb_joueur_char), Nombre_Joueurs(nb_joueur){
+//jeu::jeu(char nb_joueur_char, int nb_joueur) : Nombre_Joueurs_char(nb_joueur_char), Nombre_Joueurs(nb_joueur){}
+
+int jeu::def_nb_joueur()
+{
+  Nombre_Joueurs=0;
+  // Boucle pour s'assurer que le nombre de joueurs est dans la plage valide.
+  while (Nombre_Joueurs < 1 || Nombre_Joueurs > 7) {
+    cout << "Entrez le nombre de joueurs (entre 1 et 7) : ";
+    cin >> Nombre_Joueurs;
+    cin.ignore(); // Évite les problèmes de buffer en ignorant le retour à la ligne.
+
+    // Vérification de la validité de l'entrée.
+    if (Nombre_Joueurs < 1 || Nombre_Joueurs > 7) {
+      std::cerr << "Le nombre de joueurs doit etre entre 1 et 7." << std::endl;
+      // return 1; // Cette ligne est commentée mais peut être utilisée pour quitter si nécessaire.
+    }
+  }
+  return Nombre_Joueurs;
 }
 
-void jeu::BoucleDeJeu(std::vector<Joueur>& joueurs) {
+
+/*void jeu::BoucleDeJeu(vector<joueur>& joueurs) {
     bool quelquUnDoitPiocher;
 
     std::cout << std::endl;
@@ -67,7 +86,7 @@ void jeu::BoucleDeJeu(std::vector<Joueur>& joueurs) {
 
     }
     while (quelquUnDoitPiocher); // Continuer tant qu'au moins un joueur doit piocher
-}
+}*/
 // void Afficher_Cartes_Joueur(const Joueur& joueur, size_t numeroDuJoueur)
 // {
 //     std::cout << "Joueur " << numeroDuJoueur << " (" << joueur.nom << ") (" << joueur.type_joueur

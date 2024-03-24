@@ -10,21 +10,22 @@
 #include <string>
 #include <sstream>
 
-#include "jeu.h"
+//#include "jeu.h"
+#include "joueur.h"
 
 using namespace std;
 
-class sabot : public jeu
+class sabot : public joueur
 {
 public:
 
   int Melange_Cartes(char value);
 
-  void Ranger_Cartes(vector<Joueur>& joueurs);
+  void Ranger_Cartes(vector<joueur>& joueurs);
 
-  void Distribuer_Cartes(vector<Joueur>& joueurs);
+  void Distribuer_Cartes(vector<joueur>& joueurs);
 
-  void Retire_Cartes(Joueur& joueur);
+  void Retire_Cartes(joueur& joueur);
 
 
 };

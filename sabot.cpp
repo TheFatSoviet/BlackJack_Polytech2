@@ -48,7 +48,7 @@ using namespace std;
 
 
 
-  void sabot::Ranger_Cartes(std::vector<Joueur>& joueurs)
+  void sabot::Ranger_Cartes(vector<joueur>& joueurs)
   {
       // Ouvre le fichier Sabot.txt en mode append pour ajouter du contenu à la fin sans supprimer le contenu existant.
       ofstream fileOut("Sabot.txt", std::ios::app);
@@ -96,7 +96,7 @@ using namespace std;
       cout << "Cartes rangées avec succès dans le sabot." << std::endl; // Confirme que l'opération s'est bien déroulée.
   }
 
-  void sabot::Distribuer_Cartes(std::vector<Joueur>& joueurs)
+  void sabot::Distribuer_Cartes(std::vector<joueur>& joueurs)
   {
       ifstream fileIn("Sabot.txt"); // Ouvre le fichier Sabot.txt pour lire les cartes disponibles.
       string contenu, carte;
@@ -146,16 +146,17 @@ using namespace std;
   }
 
 
-  void sabot::Retire_Cartes(Joueur& joueur) {
-      std::ifstream fileIn("Sabot.txt");
-      std::string contenu, carte;
-      std::vector<std::string> cartes;
+/*  void sabot::Retire_Cartes(joueur& joueur)
+  {
+      ifstream fileIn("Sabot.txt");
+      string contenu, carte;
+      vector<std::string> cartes;
 
       if (fileIn.is_open()) {
           getline(fileIn, contenu); // Lit toute la ligne du fichier Sabot.txt.
           fileIn.close();
 
-          std::stringstream ss(contenu);
+          stringstream ss(contenu);
 
           // Lire toutes les cartes dans le vecteur.
           while (std::getline(ss, carte, ',')) {
@@ -170,7 +171,7 @@ using namespace std;
               cartes.erase(cartes.begin());
 
               // Mettre à jour le fichier Sabot.txt avec les cartes restantes.
-              std::ofstream fileOut("Sabot.txt");
+              ofstream fileOut("Sabot.txt");
               if (fileOut.is_open()) {
                   for (size_t i = 0; i < cartes.size(); ++i) {
                       fileOut << cartes[i];
@@ -180,14 +181,14 @@ using namespace std;
                   }
                   fileOut.close();
               } else {
-                  std::cerr << "Erreur lors de la réouverture du fichier pour écriture." << std::endl;
+                  cerr << "Erreur lors de la réouverture du fichier pour écriture." <<endl;
               }
           } else {
-              std::cerr << "Pas de cartes disponibles pour retirer." << std::endl;
+              cerr << "Pas de cartes disponibles pour retirer." << endl;
           }
       } else {
-          std::cerr << "Erreur lors de l'ouverture du fichier." << std::endl;
+          cerr << "Erreur lors de l'ouverture du fichier." << endl;
       }
   }
 
-};
+};*/
