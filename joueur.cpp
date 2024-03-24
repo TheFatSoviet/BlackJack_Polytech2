@@ -144,7 +144,7 @@ void joueur::Afficher_Cartes_Joueur(const joueur& joueur, size_t numeroDuJoueur)
 int joueur::set_mise(vector<joueur>& joueurs,int i)
 {
   int tampon;
-  
+
   if (strcmp(joueurs[i].type_joueur, "humain") != 0) { // Si le joueur n'est pas humain
     // Assigner une mise aléatoire entre 10 et 100
     tampon = rand() % 91 + 10; // % 91 assure une plage de 0-90, + 10 décale à 10-100
@@ -163,4 +163,24 @@ int joueur::set_mise(vector<joueur>& joueurs,int i)
 
 void joueur::Afficher_donner_joueur(){
       cout << "," << nom << "," << nb_partie_joue << ',' << jeton_disponible << std::endl;
+}
+
+void joueur::affiche_resultat(vector<joueur>& joueurs, int manche)
+{
+
+    // Création d'un objet ofstream pour écrire dans un fichier
+    static ofstream fichier("resultat.txt");
+
+    // Vérification que le fichier est bien ouvert
+    if (fichier.is_open()) {
+      for (size_t i = 1; i < joueurs.size(); ++i) {
+        // Écriture de lignes dans le fichier
+        fichier <<manche<<","<< joueurs[i].nom <<","<<joueurs[i].type_joueur<<","<<joueurs[i].jeton_disponible<<",";
+        }
+        fichier<<endl;
+
+    } else {
+        std::cout << "Impossible d'ouvrir le fichier." << std::endl;
+    }
+
 }

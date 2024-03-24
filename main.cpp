@@ -183,6 +183,12 @@ int main()
 
        Ranger_Cartes(joueurs);
 
+
+       //creation fichier affiche_resultat
+
+         joueurs[1].affiche_resultat(joueurs, blackjack.N_Manche_Actuelle);
+
+
       }
 
     return 0;

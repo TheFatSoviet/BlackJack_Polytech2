@@ -28,7 +28,8 @@ public:
     string set_nom(vector<joueur>& joueurs,int i);
     int set_mise(vector<joueur>& joueurs,int i);
     int calcul_gain(int score_j,int score_c,int jeton, int mise);
-    
+    void affiche_resultat(vector<joueur>& joueurs,int manche);
+
 };
 
 

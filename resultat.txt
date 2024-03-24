@@ -1,0 +1,4 @@
+1,ruben,ret3,927,1,adam,rand1,1033,1,mathis,tir16,1083,
+2,ruben,ret3,1036,2,adam,rand1,1000,2,mathis,tir16,1000,
+3,ruben,ret3,963,3,adam,rand1,967,3,mathis,tir16,917,
+4,ruben,ret3,890,4,adam,rand1,934,4,mathis,tir16,834,

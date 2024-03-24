@@ -2,6 +2,7 @@
 #define JEU_H
 
 #include <iostream>
+#include <fstream>
 #include <vector>
 #include "joueur.h"
 
