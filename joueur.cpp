@@ -19,19 +19,20 @@ using namespace std;
 // }:
 
 // Méthode pour définir le type de joueur.
-bool joueur::setTypeJoueur(const string type)
+void joueur::setTypeJoueur(int i)
 {
+  string type;
   bool typeValide;
-  typeValide = type == "humain" || type == "ret3" || type == "rand1" || type == "tir16" || type == "magic";
-  if (!typeValide) {
-    std::cout << "Type invalide. Veuillez réessayer." << std::endl;
-    return false;
-  }
-  else{
+  do {
+    cout << "Entrez le type pour le joueur " << i << " (humain, ret3, rand1, tir16, magic): ";
+    getline(std::cin, type);
+    typeValide = type == "humain" || type == "ret3" || type == "rand1" || type == "tir16" || type == "magic";
+    if (!typeValide) {
+      std::cout << "Type invalide. Veuillez réessayer." << std::endl;
+    }
+  } while (!typeValide); // Répéter jusqu'à obtenir un type valide
     strncpy(type_joueur, type.c_str(), sizeof(type_joueur) - 1);
-    type_joueur[sizeof(type_joueur) - 1] = '\0'; // Assure que la chaîne est terminée par un '\0'
-    return true;
-  }
+    type_joueur[sizeof(type_joueur) - 1] = '\0';
 }
 
 

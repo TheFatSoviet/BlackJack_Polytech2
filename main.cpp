@@ -47,27 +47,10 @@ int main()
   }
 
   // Après avoir défini les types des joueurs
-  for (int i = 1; i <= blackjack.Nombre_Joueurs; ++i) { // Exclure le croupier de la saisie
-    string typeTemp;
-    bool typeValide;
-
-    do {
-      cout << "Entrez le type pour le joueur " << i << " (humain, ret3, rand1, tir16, magic): ";
-      getline(std::cin, typeTemp);
-
-      // Vérifier si le type saisi est valide
-      typeValide = typeTemp == "humain" || typeTemp == "ret3" || typeTemp == "rand1" || typeTemp == "tir16" || typeTemp == "magic";
-
-      if (!typeValide) {
-        cout << "Type invalide. Veuillez réessayer." << endl;
-      } else {
-        // Copier le type valide dans l'attribut type_joueur du joueur
-        strncpy(joueurs[i].type_joueur, typeTemp.c_str(), sizeof(joueurs[i].type_joueur) - 1);
-        joueurs[i].type_joueur[sizeof(joueurs[i].type_joueur) - 1] = '\0'; // Assure que la chaîne est terminée par un '\0'
-      }
-
-    } while (!typeValide); // Répéter jusqu'à obtenir un type valide
+  for (int i = 1; i <= blackjack.Nombre_Joueurs; ++i){ // Exclure le croupier de la saisie
+    joueurs[i].setTypeJoueur(i);
   }
+
 
 
 
@@ -111,24 +94,37 @@ int main()
       srand(static_cast < unsigned int > (time(nullptr)));
 
       for (size_t i = 1; i < joueurs.size(); ++i) { // Commence à 1 pour exclure le croupier
-        joueurs[i].jeton_mise=joueurs[i].set_mise(joueurs,i);
+        if (strcmp(joueurs[i].type_joueur, "humain") != 0) { // Si le joueur n'est pas humain
+          // Assigner une mise aléatoire entre 10 et 100
+          joueurs[i].jeton_mise = rand() % 91 + 10; // % 91 assure une plage de 0-90, + 10 décale à 10-100
+        } else {
+          // Demander la mise pour les joueurs humains
+          do {
+            std::cout << "Joueur " << joueurs[i].nom << ", entrez votre mise (entre 10 et 100 jetons) : ";
+            std::cin >> joueurs[i].jeton_mise;
+            if (joueurs[i].jeton_mise < 10 || joueurs[i].jeton_mise > 100) {
+              cout << "Mise non valide. Veuillez miser entre 10 et 100 jetons." << endl;
+            }
+          } while (joueurs[i].jeton_mise < 10 || joueurs[i].jeton_mise > 100);
+        }
       }
 
       // Afficher la mise de tous les joueurs (sauf le croupier)
       for (size_t i = 1; i < joueurs.size(); ++i) {
-        cout << "Joueur " << joueurs[i].nom << " a mise " << joueurs[i].jeton_mise << " jetons." << endl;
+        std::cout << "Joueur " << joueurs[i].nom << " a mise " << joueurs[i].jeton_mise << " jetons." << std::endl;
       }
-     // Distribution des cartes
-     deck.Distribuer_Cartes(joueurs);
 
-     // Affichage des cartes du dealer
-     //joueurs[0].Afficher_Cartes_Joueur(joueurs[0], 0);
+ // Distribution des cartes
+ deck.Distribuer_Cartes(joueurs);
 
-     //Affichage des cartes de tous les joueurs, y compris le dealer
-     for (size_t i = 0; i < joueurs.size(); ++i)
-     {
-         joueurs[i].Afficher_Cartes_Joueur(joueurs[i], i);
-     }
+ // Affichage des cartes du dealer
+ //joueurs[0].Afficher_Cartes_Joueur(joueurs[0], 0);
+
+ //Affichage des cartes de tous les joueurs, y compris le dealer
+ for (size_t i = 0; i < joueurs.size(); ++i)
+ {
+     joueurs[i].Afficher_Cartes_Joueur(joueurs[i], i);
+ }
 
 
 
