@@ -1,5 +1,6 @@
 #include "sabot.h"
 
+
 using namespace std;
 
 
@@ -146,6 +147,102 @@ using namespace std;
       }
   }
 
+
+
+  void sabot::verifierSabot(int nombreDeJoueurs) {
+    ifstream fileIn("Sabot.txt");
+    string contenu;
+    map < std::string, int > compteurCartes;
+    int totalCartes = 0;
+
+    if (fileIn.is_open()) {
+      std::getline(fileIn, contenu);
+      fileIn.close();
+
+      std::stringstream ss(contenu);
+      std::string carte;
+      while (std::getline(ss, carte, ',')) {
+        compteurCartes[carte]++;
+        totalCartes++;
+      }
+    } else {
+      cerr << "Erreur : impossible d'ouvrir le fichier Sabot.txt" << endl;
+      return;
+    }
+
+    int totalCartesAttendu = 52 * (nombreDeJoueurs + 1); // Le +1 est pour inclure les cartes du croupier dans le calcul
+    map < std::string, int > valeursAttendues = {
+      {
+        "1",
+        4 * (nombreDeJoueurs + 1)
+      },
+      {
+        "2",
+        4 * (nombreDeJoueurs + 1)
+      },
+      {
+        "3",
+        4 * (nombreDeJoueurs + 1)
+      },
+      {
+        "4",
+        4 * (nombreDeJoueurs + 1)
+      },
+      {
+        "5",
+        4 * (nombreDeJoueurs + 1)
+      },
+      {
+        "6",
+        4 * (nombreDeJoueurs + 1)
+      },
+      {
+        "7",
+        4 * (nombreDeJoueurs + 1)
+      },
+      {
+        "8",
+        4 * (nombreDeJoueurs + 1)
+      },
+      {
+        "9",
+        4 * (nombreDeJoueurs + 1)
+      },
+      {
+        "X",
+        4 * (nombreDeJoueurs + 1)
+      },
+      {
+        "V",
+        4 * (nombreDeJoueurs + 1)
+      },
+      {
+        "D",
+        4 * (nombreDeJoueurs + 1)
+      },
+      {
+        "R",
+        4 * (nombreDeJoueurs + 1)
+      }
+    };
+
+    bool validationReussie = true;
+    if (totalCartes != totalCartesAttendu) {
+      std::cout << "Erreur : le nombre total de cartes dans le sabot (" << totalCartes << ") ne correspond pas au nombre attendu (" << totalCartesAttendu << ")." << std::endl;
+      validationReussie = false;
+    }
+
+    for (const auto & paire: valeursAttendues) {
+      if (compteurCartes[paire.first] != paire.second) {
+        std::cout << "Erreur : le nombre de cartes de valeur " << paire.first << " (" << compteurCartes[paire.first] << ") ne correspond pas au nombre attendu (" << paire.second << ")." << std::endl;
+        validationReussie = false;
+      }
+    }
+
+    if (validationReussie) {
+      std::cout << "La vérification du sabot est valide." << std::endl;
+    }
+  }
 
 /*  void sabot::Retire_Cartes(joueur& joueur)
   {

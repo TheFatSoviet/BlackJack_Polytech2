@@ -20,10 +20,10 @@ public:
     vector<string> cartes;
 
     //joueur();
-    void def_nom_joueur(const string nouveau_nom);
     bool setTypeJoueur(const string type);
     void Afficher_Cartes_Joueur(const joueur& joueur, size_t numeroDuJoueur);
     void Afficher_donner_joueur();
+    string set_nom(vector<joueur>& joueurs,int i);
 };
 
 

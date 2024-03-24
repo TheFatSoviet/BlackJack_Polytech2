@@ -7,7 +7,7 @@
 #include "humain.cpp"
 #include "sabot.cpp"
 #include "jeu.cpp"
-
+#include "croupier.cpp"
 
 #include <iostream>
 #include <fstream>
@@ -15,175 +15,6 @@
 #include <algorithm>
 #include <ctime>
 #include <cstring> // Pour les fonctions de manipulation de chaînes de caractères comme strcpy et strncpy.
-
-
-// void Retire_Cartes(Joueur& joueur) {
-//     std::ifstream fileIn("Sabot.txt");
-//     std::string contenu, carte;
-//     std::vector<std::string> cartes;
-//
-//     if (fileIn.is_open()) {
-//         getline(fileIn, contenu); // Lit toute la ligne du fichier Sabot.txt.
-//         fileIn.close();
-//
-//         std::stringstream ss(contenu);
-//
-//         // Lire toutes les cartes dans le vecteur.
-//         while (std::getline(ss, carte, ',')) {
-//             if (!carte.empty()) { // Vérifier que la chaîne n'est pas vide.
-//                 cartes.push_back(carte);
-//             }
-//         }
-//
-//         if (!cartes.empty()) {
-//             // Attribuer la première carte au joueur et la retirer du vecteur des cartes.
-//             joueur.cartes.push_back(cartes[0]);
-//             cartes.erase(cartes.begin());
-//
-//             // Mettre à jour le fichier Sabot.txt avec les cartes restantes.
-//             std::ofstream fileOut("Sabot.txt");
-//             if (fileOut.is_open()) {
-//                 for (size_t i = 0; i < cartes.size(); ++i)
-//                 {
-//                     fileOut << cartes[i];
-//                     if (i != cartes.size() - 1)
-//                     {
-//                         fileOut << ",";
-//                     }
-//                 }
-//                 fileOut.close();
-//             }
-//             else
-//             {
-//                 std::cerr << "Erreur lors de la réouverture du fichier pour écriture." << std::endl;
-//             }
-//         } else {
-//             std::cerr << "Pas de cartes disponibles pour retirer." << std::endl;
-//         }
-//     } else {
-//         std::cerr << "Erreur lors de l'ouverture du fichier." << std::endl;
-//     }
-// }
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-// void BoucleDeJeu(std::vector<Joueur>& joueurs) {
-//     bool quelquUnDoitPiocher;
-//
-//     std::cout << std::endl;
-//     std::cout << "//////////////////////////////////////////////////" << std::endl;
-//     std::cout << "/////////////////    PHASE DE PIOCHE    //////////" << std::endl;
-//     std::cout << "//////////////////////////////////////////////////" << std::endl;
-//
-//     do {
-//         quelquUnDoitPiocher = false; // Indicateur pour vérifier si au moins un joueur doit piocher
-//         for (Joueur& joueur : joueurs) {
-//             joueur.score_in_game = Calcule_Score(joueur.cartes);
-//
-//             // Appliquer la logique de pioche en fonction du type de joueur
-//             if (strcmp(joueur.type_joueur, "croupier") == 0 && joueur.pioche_croupier(joueur.score_in_game))
-//             {
-//                 std::cout << "Le croupier " << joueur.nom << " pioche une carte." << std::endl;
-//                 Retire_Cartes(joueur);
-//                 quelquUnDoitPiocher = true;
-//             }
-//             else if (strcmp(joueur.type_joueur, "ret3") == 0 && joueur.pioche_ret3(joueur.score_in_game))
-//             {
-//                 std::cout << joueur.nom << " pioche une carte." << std::endl;
-//                 Retire_Cartes(joueur);
-//                 quelquUnDoitPiocher = true;
-//             }
-//             else if (strcmp(joueur.type_joueur, "tir16") == 0 && joueur.pioche_tir16(joueur.score_in_game))  //joueurs[0].pioche_tir16(joueurs[0].score_in_game)
-//             {
-//                 std::cout << joueur.nom << " pioche une carte." << std::endl;
-//                 Retire_Cartes(joueur);
-//                 quelquUnDoitPiocher = true;
-//             }
-//             else if (strcmp(joueur.type_joueur, "humain") == 0 && joueur.pioche_humain(joueur.score_in_game))
-//             {
-//                 std::cout << joueur.nom << " pioche une carte." << std::endl;
-//                 Retire_Cartes(joueur);
-//                 quelquUnDoitPiocher = true;
-//             }
-//             else if (strcmp(joueur.type_joueur, "rand1") == 0 && joueur.pioche_rand1())
-//             {
-//                 std::cout << joueur.nom << " pioche une carte." << std::endl;
-//                 Retire_Cartes(joueur);
-//                 quelquUnDoitPiocher = true;                       // PROBLEM ON BOCULE SIMULTANEMENT JOUEUR (plusieurs jourus) DANS LKES IF RESPECTIFSD
-//             }
-//             // Ajoutez ici d'autres conditions pour les autres types de joueurs
-//             // ...
-//
-//             // Recalculer le score après chaque pioche
-//
-//
-//             joueur.score_in_game = Calcule_Score(joueur.cartes);
-//         }
-//
-//         // Si au moins un joueur a pioché, tous les scores sont recalculés et affichés
-//         if (quelquUnDoitPiocher)
-//         {
-//             for (Joueur& joueur : joueurs)
-//             {
-//                 std::cout << ">--------------- Le joueur " << joueur.nom << " a un score de : " << joueur.score_in_game << std::endl;
-//             }
-//         }
-//
-//     }
-//     while (quelquUnDoitPiocher); // Continuer tant qu'au moins un joueur doit piocher
-// }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 // Le point d'entrée principal du programme.
@@ -209,55 +40,97 @@ int main()
   strcpy(joueurs[0].nom, "Croupier");
   strcpy(joueurs[0].type_joueur, "croupier");
 
-
-  //Boucle pour obtenir et définir les noms des joueurs.
+  // Boucle pour obtenir et définir les noms des joueurs.
   for (int i = 1; i <= blackjack.Nombre_Joueurs; ++i) {
-    std::string nomTemp;
-    bool nomUnique;
-
-    do {
-      nomUnique = true; // On suppose initialement que le nom est unique
-      cout << "Entrez le nom pour le joueur " << i << ": ";
-      getline(std::cin, nomTemp);
-
-      // Vérifier si le nom est trop long et le tronquer si nécessaire
-      if (nomTemp.length() >= sizeof(joueurs[i].nom)) {
-        cerr << "Erreur : le nom est trop long. Il sera tronque." << std::endl;
-        nomTemp.resize(sizeof(joueurs[i].nom) - 1);
-      }
-
-      // Vérifier si le nom est unique par rapport à tous les noms déjà entrés
-      for (int j = 1; j < i; ++j) {
-        if (nomTemp == joueurs[j].nom) {
-          cerr << "Erreur : ce nom est déjà pris. Veuillez en choisir un autre." << std::endl;
-          nomUnique = false; // Le nom n'est pas unique, demande un autre nom
-          break; // Pas besoin de continuer à vérifier les autres noms
-        }
-      }
-    } while (!nomUnique); // Répéter tant que le nom n'est pas unique
 
     // Une fois un nom unique obtenu, l'assigner au joueur
-    joueurs[i].def_nom_joueur(nomTemp);
+    strcpy(joueurs[i].nom, joueurs[i].set_nom(joueurs,i).c_str());
   }
-
 
   // Après avoir défini les types des joueurs
   for (int i = 1; i <= blackjack.Nombre_Joueurs; ++i) { // Exclure le croupier de la saisie
     string typeTemp;
-    bool Valide;
+    bool typeValide;
 
     do {
       cout << "Entrez le type pour le joueur " << i << " (humain, ret3, rand1, tir16, magic): ";
       getline(std::cin, typeTemp);
-      Valide = joueurs[i].setTypeJoueur(typeTemp);
-    } while (!Valide); // Répéter jusqu'à obtenir un type valide
+
+      // Vérifier si le type saisi est valide
+      typeValide = typeTemp == "humain" || typeTemp == "ret3" || typeTemp == "rand1" || typeTemp == "tir16" || typeTemp == "magic";
+
+      if (!typeValide) {
+        std::cout << "Type invalide. Veuillez réessayer." << std::endl;
+      } else {
+        // Copier le type valide dans l'attribut type_joueur du joueur
+        strncpy(joueurs[i].type_joueur, typeTemp.c_str(), sizeof(joueurs[i].type_joueur) - 1);
+        joueurs[i].type_joueur[sizeof(joueurs[i].type_joueur) - 1] = '\0'; // Assure que la chaîne est terminée par un '\0'
+      }
+
+    } while (!typeValide); // Répéter jusqu'à obtenir un type valide
   }
 
 
 
+  // Initialiser les jetons pour tous les joueurs
+    for (int i = 0; i <= blackjack.Nombre_Joueurs; ++i) { // Commence à 0 pour inclure le croupier
+      if (i == 0) { // Le croupier est le joueur à l'indice 0
+        joueurs[i].jeton_disponible = 100000000; // 100 millions pour le croupier
+      } else {
+        joueurs[i].jeton_disponible = 1000; // 1000 jetons pour les joueurs
+      }
+    }
 
+    cout << "Combien de manche voulez-vous jouer ? : ";
+    cin >> blackjack.N_Manche_Total;
 
+    //------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+    while (blackjack.N_Manche_Actuelle < blackjack.N_Manche_Total) {
+      blackjack.N_Manche_Actuelle++;
 
+      cout << std::endl;
+      cout << "//////////////////////////////////////////////////" << endl;
+      cout << "/////////////////    DEBUT ROUND " << blackjack.N_Manche_Actuelle << "////////////" << endl;
+      cout << "//////////////////////////////////////////////////" << endl;
+      cout << std::endl;
+
+      deck.verifierSabot(blackjack.Nombre_Joueurs);
+
+      cout << std::endl;
+      cout << "//////////////////////////////////////////////////" << endl;
+      cout << "/////////////////    PHASE DE MISE    ////////////" << endl;
+      cout << "//////////////////////////////////////////////////" << endl;
+      cout << endl;
+
+      for (size_t i = 1; i < joueurs.size(); ++i) {
+        const auto & joueur = joueurs[i];
+        cout << "Joueur " << joueur.nom << " possède " << joueur.jeton_disponible << " jetons." << endl;
+      }
+
+      cout << endl;
+
+      srand(static_cast < unsigned int > (time(nullptr)));
+
+      for (size_t i = 1; i < joueurs.size(); ++i) { // Commence à 1 pour exclure le croupier
+        if (strcmp(joueurs[i].type_joueur, "humain") != 0) { // Si le joueur n'est pas humain
+          // Assigner une mise aléatoire entre 10 et 100
+          joueurs[i].jeton_mise = rand() % 91 + 10; // % 91 assure une plage de 0-90, + 10 décale à 10-100
+        } else {
+          // Demander la mise pour les joueurs humains
+          do {
+            std::cout << "Joueur " << joueurs[i].nom << ", entrez votre mise (entre 10 et 100 jetons) : ";
+            std::cin >> joueurs[i].jeton_mise;
+            if (joueurs[i].jeton_mise < 10 || joueurs[i].jeton_mise > 100) {
+              cout << "Mise non valide. Veuillez miser entre 10 et 100 jetons." << endl;
+            }
+          } while (joueurs[i].jeton_mise < 10 || joueurs[i].jeton_mise > 100);
+        }
+      }
+
+      // Afficher la mise de tous les joueurs (sauf le croupier)
+      for (size_t i = 1; i < joueurs.size(); ++i) {
+        std::cout << "Joueur " << joueurs[i].nom << " a mise " << joueurs[i].jeton_mise << " jetons." << std::endl;
+      }
 
  // Distribution des cartes
  deck.Distribuer_Cartes(joueurs);
@@ -274,64 +147,79 @@ int main()
 
 
 
-  //joueurs[0].score_in_game = 10 ;
-//----------------------------------------------------------------------------------------------------------------------------
-  // joueurs[0].score_in_game = Calcule_Score(joueurs[0].cartes);
-  //
-  //
-  // if (joueurs[0].pioche_tir16(joueurs[0].score_in_game))
-  // {
-  //     std::cout << "Le dealer " << joueurs[0].nom << " pioche une carte." << std::endl;
-  //     Retire_Cartes(joueurs[0]);
-  // }
-  // else {
-  //     std::cout << "Le dealer " << joueurs[0].nom << " ne pioche pas." << std::endl;
-  // }
-  //
-  //
-  //
-  // // Affichage des cartes de tous les joueurs, y compris le dealer
-  // for (size_t i = 0; i < joueurs.size(); ++i)
-  // {
-  //     Afficher_Cartes_Joueur(joueurs[i], i);
-  // }
-//----------------------------------------------------------------------------------------------------------------------------
 
 
 //BoucleDeJeu(joueurs);
 
-//ici faut :
-// une boucle pour : calculer score
-// mais en mm temps si ya une pioche faut encore calculer le score du joeur qui pioche
-// en plus mettre en place les types
-
-
-  // for (size_t i = 0; i < joueurs.size(); ++i)
-  // {
-  //       joueurs[i].score_in_game = Calcule_Score(joueurs[i].cartes);
-  //
-  //
-  //
-  //       if (joueurs[0].pioche_croupier(joueurs[0].score_in_game))
-  //       {
-  //           std::cout << "Le dealer " << joueurs[0].nom << " pioche une carte." << std::endl;
-  //           Retire_Cartes(joueurs[0]);
-  //           joueurs[0].score_in_game = Calcule_Score(joueurs[0].cartes);
-  //
-  //       }
-  //       else {
-  //           std::cout << "Le dealer " << joueurs[0].nom << " ne pioche pas." << std::endl;
-  //       }
-  //
-  //
-  //       //std::cout << "Le joueur " << joueurs[i].nom << "a :" << joueurs[i].score_in_game << std::endl;
-  // }
 
 
 
 
 
+/*
+std::cout << std::endl;
+    std::cout << "//////////////////////////////////////////////////" << std::endl;
+    std::cout << "/////////////////    SCORE FINALE     ////////////" << std::endl;
+    std::cout << "//////////////////////////////////////////////////" << std::endl;
+    std::cout << std::endl;
 
+    //score
+    for (size_t i = 0; i < joueurs.size(); ++i) {
+      std::cout << "Le joueur " << joueurs[i].nom << " a :" << joueurs[i].score_in_game << std::endl;
+    }
+
+    std::cout << std::endl;
+    std::cout << "//////////////////////////////////////////////////" << std::endl;
+    std::cout << "/////////////////    PHASE DE GAIN    ////////////" << std::endl;
+    std::cout << "//////////////////////////////////////////////////" << std::endl;
+    std::cout << std::endl;
+
+    gain calculateurDeGain; // Créez une instance de votre classe gain
+
+    for (size_t i = 1; i < joueurs.size(); ++i) {
+      int nouveauTotalJetons = calculateurDeGain.calcul_gain(joueurs[i].score_in_game, joueurs[0].score_in_game, joueurs[i].jeton_possede, joueurs[i].jeton_mise);
+
+      // Imprimez le résultat et mettez à jour les jetons du joueur
+      if (nouveauTotalJetons > joueurs[i].jeton_possede) {
+        std::cout << "Joueur " << joueurs[i].nom << " gagne " << (nouveauTotalJetons - joueurs[i].jeton_possede) << " jetons." << std::endl;
+      } else if (nouveauTotalJetons < joueurs[i].jeton_possede) {
+        std::cout << "Joueur " << joueurs[i].nom << " perd " << (joueurs[i].jeton_possede - nouveauTotalJetons) << " jetons." << std::endl;
+      } else {
+        std::cout << "Joueur " << joueurs[i].nom << " ne gagne ni ne perd des jetons." << std::endl;
+      }
+
+      joueurs[i].jeton_possede = nouveauTotalJetons; // Mettre à jour les jetons du joueur
+    }
+
+    std::cout << std::endl;
+    std::cout << "//////////////////////////////////////////////////" << std::endl;
+    std::cout << "/////////////////    INFO JETONS      ////////////" << std::endl;
+    std::cout << "//////////////////////////////////////////////////" << std::endl;
+    std::cout << std::endl;
+
+    for (size_t i = 1; i < joueurs.size(); ++i) {
+      const auto & joueur = joueurs[i];
+      std::cout << "Joueur " << joueur.nom << " possède " << joueur.jeton_possede << " jetons." << std::endl;
+    }
+
+    // Après toutes les manipulations des cartes
+
+    std::cout << std::endl;
+    std::cout << "//////////////////////////////////////////////////" << std::endl;
+    std::cout << "/////////////////    FIN DE ROUND " << N_Manche_Actuelle << "    ////////////" << std::endl;
+    std::cout << "//////////////////////////////////////////////////" << std::endl;
+    std::cout << std::endl;
+
+    // Reset le choix de l'humain de ne plus piocher de carte
+    for (auto & joueur: joueurs) {
+      if (auto h = dynamic_cast < humain * > ( & joueur)) {
+        h -> flag_repondu_non = 0; // Réinitialiser le flag pour le joueur humain
+      }
+    }
+
+    Ranger_Cartes(joueurs);
+
+  }*/
 
 
 
@@ -407,7 +295,7 @@ int main()
     // Affichage du score
   //  std::cout << "Le score est: " << score << std::endl;
 
-
+}
 
     return 0;
 }

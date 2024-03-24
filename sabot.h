@@ -9,6 +9,7 @@
 #include <vector>
 #include <string>
 #include <sstream>
+#include <map>
 
 //#include "jeu.h"
 #include "joueur.h"
@@ -27,7 +28,7 @@ public:
 
   void Retire_Cartes(joueur& joueur);
 
-void Afficher_Cartes_Joueur(const joueur& joueur, size_t numeroDuJoueur);
+  void verifierSabot(int nombreDeJoueurs);
 };
 
 #endif

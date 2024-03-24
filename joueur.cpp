@@ -35,11 +35,36 @@ bool joueur::setTypeJoueur(const string type)
 }
 
 
-// Méthode pour définir ou changer le nom du joueur.
-void joueur::def_nom_joueur(const string nouveau_nom)
+string joueur::set_nom(vector<joueur>& joueurs,int i)
 {
-  strcpy(nom, nouveau_nom.c_str());
+  string nomTemp;
+  bool nomUnique;
+
+  do {
+    nomUnique = true; // On suppose initialement que le nom est unique
+
+    cout << "Entrez le nom pour le joueur " << i << ": ";
+    getline(std::cin, nomTemp);
+
+    // Vérifier si le nom est trop long et le tronquer si nécessaire
+    if (nomTemp.length() >= sizeof(joueurs[i].nom)) {
+      cerr << "Erreur : le nom est trop long. Il sera tronque." << endl;
+      nomTemp.resize(sizeof(joueurs[i].nom) - 1);
+    }
+
+    // Vérifier si le nom est unique par rapport à tous les noms déjà entrés
+    for (int j = 1; j < i; ++j) {
+      if (nomTemp == joueurs[j].nom) {
+        cerr << "Erreur : ce nom est déjà pris. Veuillez en choisir un autre." << endl;
+        nomUnique = false; // Le nom n'est pas unique, demande un autre nom
+        break; // Pas besoin de continuer à vérifier les autres noms
+      }
+    }
+  } while (!nomUnique); // Répéter tant que le nom n'est pas unique
+
+  return nomTemp;
 }
+
 
 void joueur::Afficher_Cartes_Joueur(const joueur& joueur, size_t numeroDuJoueur)
 {
