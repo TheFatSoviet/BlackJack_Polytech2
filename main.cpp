@@ -187,8 +187,6 @@
 // Le point d'entrée principal du programme.
 int main()
 {
-
-int test;
    // Vecteur pour conserver les joueurs, y compris le dealer.
    vector<joueur> joueurs;
 
@@ -201,8 +199,9 @@ int test;
    cout<<blackjack.Nombre_Joueurs;
 
    // Appel de la fonction de mélange des cartes.
-   test=deck.Melange_Cartes(blackjack.Nombre_Joueurs);
-cout<<test;
+   deck.Melange_Cartes(blackjack.Nombre_Joueurs);
+
+
    // Initialisation des joueurs, y compris le dealer.
    //joueurs.resize(Nombre_Joueurs + 1);
 
