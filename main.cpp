@@ -1,8 +1,10 @@
 //Ruben SARGSYAN
 //commentaires générer par ia
-#include "joueur.h"
-#include "rand.h"
-#include "ret3.h"
+#include "joueur.cpp"
+#include "rand.cpp"
+#include "ret3.cpp"
+#include "tir16.cpp"
+#include "humain.cpp"
 #include "sabot.cpp"
 #include "jeu.cpp"
 
@@ -196,55 +198,70 @@ int main()
 
    blackjack.Nombre_Joueurs=blackjack.def_nb_joueur();
 
-   cout<<blackjack.Nombre_Joueurs;
-
    // Appel de la fonction de mélange des cartes.
    deck.Melange_Cartes(blackjack.Nombre_Joueurs);
 
 
    // Initialisation des joueurs, y compris le dealer.
-   //joueurs.resize(Nombre_Joueurs + 1);
+  joueurs.resize(blackjack.Nombre_Joueurs + 1);
 
-   // Définition du nom du dealer.
-   strcpy(joueurs[0].nom, "Dealer");
-   strcpy(joueurs[0].type_joueur, "croupier");
+  // Définition du nom du Croupier.
+  strcpy(joueurs[0].nom, "Croupier");
+  strcpy(joueurs[0].type_joueur, "croupier");
 
+  // Boucle pour obtenir et définir les noms des joueurs.
+  for (int i = 1; i <= blackjack.Nombre_Joueurs; ++i) {
+    std::string nomTemp;
+    bool nomUnique;
 
-  //  // Boucle pour obtenir et définir les noms des joueurs humains.
-  //  for (int i = 1; i <= Nombre_Joueurs; ++i)
-  //  {
-  //      std::cout << "Entrez le nom pour le joueur " << i << ": ";
-  //      std::string nomTemp;
-  //      std::getline(std::cin, nomTemp);
-  //
-  //      // Si le nom est trop long, il est tronqué pour s'adapter.
-  //      if (nomTemp.length() >= sizeof(joueurs[i].nom))
-  //      {
-  //          std::cerr << "Erreur : le nom est trop long. Il sera tronque." << std::endl;
-  //          nomTemp.resize(sizeof(joueurs[i].nom) - 1);
-  //      }
-  //
-  //      // Copie du nom temporaire dans l'objet joueur.
-  //      strcpy(joueurs[i].nom, nomTemp.c_str());
-  //  }
-  //
-  // // Après avoir défini les types des joueurs
-  // for (int i = 1; i <= Nombre_Joueurs; ++i) // Inclure 0 pour inclure le dealer dans la saisie
-  // {
-  //     std::string typeTemp;
-  //
-  //     std::cout << "Entrez le type pour le joueur " << i << " : ";
-  //     std::getline(std::cin, typeTemp);
-  //
-  //     strncpy(joueurs[i].type_joueur, typeTemp.c_str(), sizeof(joueurs[i].type_joueur) - 1);
-  //     joueurs[i].type_joueur[sizeof(joueurs[i].type_joueur) - 1] = '\0'; // Assure que la chaîne est terminée par un '\0'
-  //   }
+    do {
+      nomUnique = true; // On suppose initialement que le nom est unique
 
-   // Affichage des noms de tous les joueurs pour confirmation.
-   // for (size_t i = 0; i < joueurs.size(); ++i)
-   // {
-   //     std::cout << "Joueur " << i << " : " << joueurs[i].nom << std::endl;
-   // }
+      cout << "Entrez le nom pour le joueur " << i << ": ";
+      getline(std::cin, nomTemp);
+
+      // Vérifier si le nom est trop long et le tronquer si nécessaire
+      if (nomTemp.length() >= sizeof(joueurs[i].nom)) {
+        cerr << "Erreur : le nom est trop long. Il sera tronque." << std::endl;
+        nomTemp.resize(sizeof(joueurs[i].nom) - 1);
+      }
+
+      // Vérifier si le nom est unique par rapport à tous les noms déjà entrés
+      for (int j = 1; j < i; ++j) {
+        if (nomTemp == joueurs[j].nom) {
+          cerr << "Erreur : ce nom est déjà pris. Veuillez en choisir un autre." << std::endl;
+          nomUnique = false; // Le nom n'est pas unique, demande un autre nom
+          break; // Pas besoin de continuer à vérifier les autres noms
+        }
+      }
+    } while (!nomUnique); // Répéter tant que le nom n'est pas unique
+
+    // Une fois un nom unique obtenu, l'assigner au joueur
+    strcpy(joueurs[i].nom, nomTemp.c_str());
+  }
+
+  // Après avoir défini les types des joueurs
+  for (int i = 1; i <= blackjack.Nombre_Joueurs; ++i) { // Exclure le croupier de la saisie
+    string typeTemp;
+    bool typeValide;
+
+    do {
+      cout << "Entrez le type pour le joueur " << i << " (humain, ret3, rand1, tir16, magic): ";
+      getline(std::cin, typeTemp);
+
+      // Vérifier si le type saisi est valide
+      typeValide = typeTemp == "humain" || typeTemp == "ret3" || typeTemp == "rand1" || typeTemp == "tir16" || typeTemp == "magic";
+
+      if (!typeValide) {
+        std::cout << "Type invalide. Veuillez réessayer." << std::endl;
+      } else {
+        // Copier le type valide dans l'attribut type_joueur du joueur
+        strncpy(joueurs[i].type_joueur, typeTemp.c_str(), sizeof(joueurs[i].type_joueur) - 1);
+        joueurs[i].type_joueur[sizeof(joueurs[i].type_joueur) - 1] = '\0'; // Assure que la chaîne est terminée par un '\0'
+      }
+
+    } while (!typeValide); // Répéter jusqu'à obtenir un type valide
+  }
 
 
 
@@ -253,16 +270,16 @@ int main()
 
 
  // Distribution des cartes
-//deck.Distribuer_Cartes(joueurs);
+ deck.Distribuer_Cartes(joueurs);
 
  // Affichage des cartes du dealer
- ///Afficher_Cartes_Joueur(joueurs[0], 0);
+ //joueurs[0].Afficher_Cartes_Joueur(joueurs[0], 0);
 
- // Affichage des cartes de tous les joueurs, y compris le dealer
- // for (size_t i = 0; i < joueurs.size(); ++i)
- // {
- //     joueur.Afficher_Cartes_Joueur(joueurs[i], i);
- // }
+ //Affichage des cartes de tous les joueurs, y compris le dealer
+ for (size_t i = 0; i < joueurs.size(); ++i)
+ {
+     joueurs[i].Afficher_Cartes_Joueur(joueurs[i], i);
+ }
 
 
 

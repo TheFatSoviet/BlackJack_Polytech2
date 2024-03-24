@@ -3,9 +3,11 @@
 
 #include <iostream>
 
+
 using namespace std;
 
-class jeu {
+class jeu
+{
 public:
     char Nombre_Joueurs_char = 2;
     int Nombre_Joueurs = 0;
@@ -13,7 +15,7 @@ public:
     //jeu(char nb_joueur_char, int nb_joueur);
     int def_nb_joueur();
     //void BoucleDeJeu(vector<joueur>& joueurs);
-  //  void Afficher_Cartes_Joueur(const Joueur& joueur, size_t numeroDuJoueur);
+
 };
 
 

@@ -36,19 +36,39 @@ void joueur::creation_joueur(const char* nouveau_nom)
     strcpy(nom, nouveau_nom); // Copie le nouveau nom dans le tableau 'nom' si tout est en ordre.
 }
 
-// Methode pour afficher les cartes des Joueur
-void joueur::afficherCartesJoueur(size_t numeroDuJoueur)
+void joueur::Afficher_Cartes_Joueur(const joueur& joueur, size_t numeroDuJoueur)
 {
-    // Commence par afficher le numéro et le nom du joueur.
-    cout << "Joueur " << " (" << nom << ") a les cartes: ";
-    // Itère sur le vecteur de cartes du joueur pour afficher chaque carte.
-    for (const auto& carte : cartes)
-    {
-        cout << carte << " "; // Affiche la carte suivie d'un espace pour séparer les cartes entre elles.
-    }
-    cout << std::endl; // Termine l'affichage par un retour à la ligne pour une meilleure lisibilité.
-}
+    cout << "Joueur " << numeroDuJoueur << " (" << joueur.nom << ") (" << joueur.type_joueur
+              << ") a les cartes: ";
 
+    if (numeroDuJoueur == 0)
+    {
+        // Affiche la première carte normalement, les autres en tant que "X"
+        bool premiereCarteAffichee = false;
+        for (const auto& carte : joueur.cartes)
+        {
+            if (!premiereCarteAffichee)
+            {
+                cout << carte << " "; // Affiche la première carte
+                premiereCarteAffichee = true;
+            }
+            else
+            {
+                cout << "# "; // Remplace les autres cartes par "X"
+            }
+        }
+    }
+    else
+    {
+        // Pour les autres joueurs, affiche toutes les cartes normalement
+        for (const auto& carte : joueur.cartes)
+        {
+            cout << carte << " ";
+        }
+    }
+
+    cout <<endl;
+}
 
 void joueur::Afficher_donner_joueur(){
       cout << "," << nom << "," << nb_partie_joue << ',' << jeton_disponible << std::endl;

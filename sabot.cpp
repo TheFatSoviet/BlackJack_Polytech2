@@ -3,6 +3,7 @@
 using namespace std;
 
 
+
   int sabot::Melange_Cartes(int value)
   {
       value++;
@@ -10,7 +11,7 @@ using namespace std;
           return 0; // Si la valeur n'est pas entre 1 et 8, renvoyer 0
 
       // Création d'un jeu de cartes
-      vector<char> Sabot_Type = {'1', '2', '3', '4', '5', '6', '7', '8', '9', 'V', 'D', 'R'};
+      vector<char> Sabot_Type = {'1', '2', '3', '4', '5', '6', '7', '8', '9', 'X', 'V', 'D', 'R'};
       vector<char> Cartes;
 
       // Multiplication du jeu de cartes par le nombre de joueurs
@@ -96,7 +97,7 @@ using namespace std;
       cout << "Cartes rangées avec succès dans le sabot." << std::endl; // Confirme que l'opération s'est bien déroulée.
   }
 
-  void sabot::Distribuer_Cartes(std::vector<joueur>& joueurs)
+  void sabot::Distribuer_Cartes(vector<joueur>& joueurs)
   {
       ifstream fileIn("Sabot.txt"); // Ouvre le fichier Sabot.txt pour lire les cartes disponibles.
       string contenu, carte;

@@ -27,7 +27,7 @@ public:
 
   void Retire_Cartes(joueur& joueur);
 
-
+void Afficher_Cartes_Joueur(const joueur& joueur, size_t numeroDuJoueur);
 };
 
 #endif

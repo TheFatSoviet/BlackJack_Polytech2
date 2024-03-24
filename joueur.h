@@ -17,12 +17,12 @@ public:
     int nb_partie_joue;
     int jeton_disponible;
     int jeton_mise;
-    std::vector<std::string> cartes;
+    vector<string> cartes;
 
     //joueur();
     void creation_joueur(const char* nouveau_nom);
     void setTypeJoueur(const char* type);
-    void afficherCartesJoueur(size_t numeroDuJoueur);
+    void Afficher_Cartes_Joueur(const joueur& joueur, size_t numeroDuJoueur);
     void Afficher_donner_joueur();
 };
 

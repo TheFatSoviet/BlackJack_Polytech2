@@ -22,6 +22,7 @@ int jeu::def_nb_joueur()
 }
 
 
+
 /*void jeu::BoucleDeJeu(vector<joueur>& joueurs) {
     bool quelquUnDoitPiocher;
 
